@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
         ])->count(10)->create();
 
         $acadimicyear = AcadimicYear::factory([
-            "department_id"=>$dept->id
+            "department_id"=>$dept->id,
+            "current"=>true
         ])->create();
 //
 //

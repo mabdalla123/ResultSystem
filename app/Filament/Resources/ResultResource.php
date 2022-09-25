@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ResultResource\Pages;
 use App\Filament\Resources\ResultResource\RelationManagers;
+use App\Models\AcadimicYear;
+use App\Models\Department;
 use App\Models\Result;
 use App\Models\Semester;
 use App\Models\Subject;
@@ -33,6 +35,39 @@ class ResultResource extends Resource
             ->schema([
 
 
+
+                Forms\Components\Select::make("department")
+                    ->label("Department")
+                    ->options(function () {
+                        return Department::all()->pluck("name", "id");
+                    })
+                    ->reactive()
+                    ->columnSpan([
+                        "md" => 1
+                    ])
+                    ->afterStateUpdated(
+                        fn (callable $set) => $set("acadimicyear_id", null)
+                    )
+                    ->required(),
+                Forms\Components\Select::make("acadimicyear_id")
+                    ->options(function (callable $get) {
+
+                        $department = Department::find($get("department"));
+
+                        if ($department && $department->acadimicyear()->where("current", true)) {
+                            return $department->acadimicyear()->where("current", true)->pluck("name", "id");
+                        }
+
+                        return [];
+                    })
+                    ->reactive()
+                    ->columnSpan([
+                        "md" => 1
+                    ])
+                    ->afterStateUpdated(
+                        fn (callable $set) => $set("semester", null)
+                    )
+                    ->required(),
                 Forms\Components\Select::make("semester_id")
                     ->relationship("semester", "name")
                     ->reactive()

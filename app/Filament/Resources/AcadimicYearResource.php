@@ -26,7 +26,8 @@ class AcadimicYearResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("name"),
+                Forms\Components\TextInput::make("name")->disabled(
+                    fn($context) : bool=> $context === "edit"),
                 Forms\Components\Checkbox::make("current"),
                 Forms\Components\Select::make("department_id")->relationship("department","name"),
 

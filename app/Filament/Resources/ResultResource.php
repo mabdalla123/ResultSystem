@@ -85,7 +85,7 @@ class ResultResource extends Resource
                         "md" => 1
                     ])
                     ->required()
-                    ->afterStateUpdated(function (callable $get, $set) {
+                    ->afterStateUpdated(function (callable $get) {
 
                         $result = Result::where("semester_id", $get("semester_id"))
                             ->where("student_id", $get("student_id"))->count();

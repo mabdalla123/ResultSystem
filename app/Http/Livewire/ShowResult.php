@@ -32,6 +32,8 @@ class ShowResult extends Component implements HasForms
             Forms\Components\Select::make("semester_id")
                 ->relationship("semester", "name")
                 ->reactive()
+                ->disabled()
+
                 ->columnSpan([
                     "md" => 1
                 ])
@@ -42,6 +44,8 @@ class ShowResult extends Component implements HasForms
             Forms\Components\Select::make("student_id")
                 ->relationship("student", "name")
                 ->reactive()
+                ->disabled()
+
                 ->columnSpan([
                     "md" => 1
                 ])
@@ -64,6 +68,7 @@ class ShowResult extends Component implements HasForms
                             ->label("subjects")
                             ->reactive()
                             ->required()
+                            ->disabled()
                             ->options(
                                 function (callable $get) {
 
@@ -83,9 +88,14 @@ class ShowResult extends Component implements HasForms
                         Forms\Components\TextInput::make('avarege')
                             ->required()
                             ->minValue(0)
+                            ->disabled()
+
                             ->maxValue(100),
 
-                    ])->minItems(function (callable $get) {
+                    ])
+                    ->disableItemCreation()
+                    ->disableItemDeletion()
+                    ->minItems(function (callable $get) {
                         $semester = Semester::find($get("semester_id"));
                         if ($semester) {
                             return $semester->subjects

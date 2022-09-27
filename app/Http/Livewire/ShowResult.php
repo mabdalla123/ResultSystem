@@ -15,51 +15,20 @@ class ShowResult extends Component implements HasForms
 
     use InteractsWithForms;
 
-     public  $result;
+    public  $result;
 
     public function mount( $result)
     {
 
 
         $this->result = Result::find($result);
-        $this->form->fill();
+        $this->form->fill([]);
 
     }
     protected function getFormSchema(): array
     {
         return [
-            Forms\Components\Select::make("department")
-                ->label("Department")
-                ->options(function () {
-                    return Department::all()->pluck("name", "id");
-                })
-                ->reactive()
-                ->columnSpan([
-                    "md" => 1
-                ])
-                ->afterStateUpdated(
-                    fn (callable $set) => $set("acadimicyear_id", null)
-                )
-                ->required(),
-            Forms\Components\Select::make("acadimicyear_id")
-                ->options(function (callable $get) {
 
-                    $department = Department::find($get("department"));
-
-                    if ($department && $department->acadimicyear()->where("current", true)) {
-                        return $department->acadimicyear()->where("current", true)->pluck("name", "id");
-                    }
-
-                    return [];
-                })
-                ->reactive()
-                ->columnSpan([
-                    "md" => 1
-                ])
-                ->afterStateUpdated(
-                    fn (callable $set) => $set("semester", null)
-                )
-                ->required(),
             Forms\Components\Select::make("semester_id")
                 ->relationship("semester", "name")
                 ->reactive()
@@ -82,7 +51,7 @@ class ShowResult extends Component implements HasForms
                 ->columnSpan([
                     "md" => 1
                 ])
-                ->label("Percentage %")
+
                 ->disabled(),
 
             Forms\Components\Card::make()->schema([

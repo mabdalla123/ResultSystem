@@ -18,7 +18,8 @@ class Result extends Model
     ];
 
     protected $cast = [
-        "average"=>"double"
+        "average"=>"double",
+        "details"=>"array"
     ];
 
     public function student()

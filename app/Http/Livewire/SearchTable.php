@@ -13,7 +13,7 @@ use Filament\Forms\Components\Builder;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Concerns\InteractsWithForms;
 
-class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasForms
+class SearchTable extends Component  implements Tables\Contracts\HasTable, HasForms
 
 {
 
@@ -47,13 +47,13 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasFo
                         $department = Department::find($get("department"));
 
                         if ($department) {
-                            return $department->acadimicyear->pluck("name", "id")??[];
+                            return $department->acadimicyear->pluck("name", "id") ?? [];
                         } else {
                             return [];
                         }
                     }
                 ),
-                Select::make("semester")
+            Select::make("semester")
                 ->label("Semester")
                 ->reactive()
                 ->options(
@@ -62,14 +62,14 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasFo
                         $acadimicyear = AcadimicYear::find($get("acadimicyear"));
 
                         if ($acadimicyear && $acadimicyear->semester) {
-                            return $acadimicyear->semester->pluck("name", "id")??[];
+                            return $acadimicyear->semester->pluck("name", "id") ?? [];
                         } else {
                             return [];
                         }
                     }
                 ),
 
-                Select::make("student")
+            Select::make("student")
                 ->label("student")
                 ->reactive()
                 ->options(
@@ -78,7 +78,7 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasFo
                         $department = Department::find($get("department"));
 
                         if ($department) {
-                            return $department->students->pluck("name", "id")??[];
+                            return $department->students->pluck("name", "id") ?? [];
                         } else {
                             return [];
                         }
@@ -94,9 +94,8 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasFo
 
     protected function getTableQuery()
     {
-        return Result::where("semester_id",$this->semester)
-        ->where("student_id",$this->student)
-        ;
+        return Result::where("semester_id", $this->semester)
+            ->where("student_id", $this->student);
     }
 
     protected function getTableColumns(): array
@@ -112,4 +111,8 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable ,HasFo
     }
 
 
+    protected function getTableRecordUrlUsing()
+    {
+        return fn (Result $record): string => route('showresult', ['Result' => $record]);
+    }
 }

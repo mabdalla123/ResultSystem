@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Form;
 use App\Http\Livewire\SearchTable;
+use App\Http\Livewire\ShowResult;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', SearchTable::class);
+Route::get('/showResult/{result}', ShowResult::class)->name("showresult");

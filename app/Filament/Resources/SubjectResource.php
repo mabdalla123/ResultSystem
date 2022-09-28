@@ -27,6 +27,7 @@ class SubjectResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make("name"),
+                Forms\Components\TextInput::make("credit_hours"),
                 Forms\Components\Select::make("semester_id")->relationship('semester','name'),
 
 
@@ -43,6 +44,7 @@ class SubjectResource extends Resource
                 Tables\Columns\TextColumn::make('semester.name'),
                 Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('credit_hours'),
 
             ])
             ->filters([

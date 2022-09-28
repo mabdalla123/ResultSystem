@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->foreignIdFor(Semester::class);
-
+            $table->double("credit_hours");
             $table->timestamps();
         });
     }

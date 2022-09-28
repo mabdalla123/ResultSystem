@@ -49,7 +49,8 @@ class DatabaseSeeder extends Seeder
         ])->create();
 
         Subject::factory([
-            "semester_id"=>$Semester->id
+            "semester_id"=>$Semester->id,
+            "credit_hours"=>3
         ])->count(4)->create();
 
 

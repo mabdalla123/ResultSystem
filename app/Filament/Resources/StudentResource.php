@@ -22,6 +22,9 @@ class StudentResource extends Resource
 
     protected static ?string $navigationGroup = 'Student';
 
+    protected static ?string $recordTitleAttribute = "name";
+
+
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -31,7 +34,7 @@ class StudentResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make("name"),
-                Forms\Components\Select::make("department_id")->relationship('department','name'),
+                Forms\Components\Select::make("department_id")->relationship('department', 'name'),
             ]);
     }
 
@@ -69,4 +72,6 @@ class StudentResource extends Resource
             'edit' => Pages\EditStudent::route('/{record}/edit'),
         ];
     }
+
+
 }

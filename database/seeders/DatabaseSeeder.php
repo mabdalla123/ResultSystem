@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
@@ -31,8 +30,6 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // Student::factory()->hasDepartment(1)->hasAcadimicYear(1)->create();
-        // Student::factory()->hasDepartment(1)->hasAcadimicYear(1)->create();
         $dept=Department::factory()->create();
         Student::factory([
             "department_id"=>$dept->id
@@ -44,12 +41,12 @@ class DatabaseSeeder extends Seeder
         ])->create();
 //
 //
-        $Semester =Semester::factory([
+        $semester =Semester::factory([
             "acadimic_year_id"=>$acadimicyear->id
         ])->create();
 
         Subject::factory([
-            "semester_id"=>$Semester->id,
+            "semester_id"=>$semester->id,
             "credit_hours"=>3
         ])->count(4)->create();
 

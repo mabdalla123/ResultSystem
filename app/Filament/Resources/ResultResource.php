@@ -29,136 +29,131 @@ class ResultResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+
+
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
+            ->schema(
+                [
+                    Forms\Components\Select::make("department")
+                        ->label("Department")
+                        ->options(function () {
+                            return Department::all()->pluck("name", "id");
+                        })
+                        ->reactive()
+                        ->columnSpan([
+                            "md" => 1
+                        ])
+                        ->afterStateUpdated(
+                            fn (callable $set) => $set("acadimicyear_id", null)
+                        )
+                        ->required(),
+                    Forms\Components\Select::make("acadimicyear_id")
+                        ->options(function (callable $get) {
 
+                            $department = Department::find($get("department"));
 
+                            if ($department && $department->acadimicyear()->where("current", true)) {
+                                return $department->acadimicyear()->where("current", true)->pluck("name", "id");
+                            }
 
-                Forms\Components\Select::make("department")
-                    ->label("Department")
-                    ->options(function () {
-                        return Department::all()->pluck("name", "id");
-                    })
-                    ->reactive()
-                    ->columnSpan([
-                        "md" => 1
-                    ])
-                    ->afterStateUpdated(
-                        fn (callable $set) => $set("acadimicyear_id", null)
-                    )
-                    ->required(),
-                Forms\Components\Select::make("acadimicyear_id")
-                    ->options(function (callable $get) {
+                            return [];
+                        })
+                        ->reactive()
+                        ->columnSpan([
+                            "md" => 1
+                        ])
+                        ->afterStateUpdated(
+                            fn (callable $set) => $set("semester", null)
+                        )
+                        ->required(),
+                    Forms\Components\Select::make("semester_id")
+                        ->relationship("semester", "name")
+                        ->reactive()
+                        ->columnSpan([
+                            "md" => 1
+                        ])
+                        ->afterStateUpdated(
+                            fn (callable $set) => $set("subject_id", null)
+                        )
+                        ->required(),
+                    Forms\Components\Select::make("student_id")
+                        ->relationship("student", "name")
+                        ->reactive()
+                        ->columnSpan([
+                            "md" => 1
+                        ])
+                        ->required()
+                        ->afterStateUpdated(function (callable $get) {
 
-                        $department = Department::find($get("department"));
+                            $result = Result::where("semester_id", $get("semester_id"))
+                                ->where("student_id", $get("student_id"))->count();
 
-                        if ($department && $department->acadimicyear()->where("current", true)) {
-                            return $department->acadimicyear()->where("current", true)->pluck("name", "id");
-                        }
+                            if ($result != 0) {
 
-                        return [];
-                    })
-                    ->reactive()
-                    ->columnSpan([
-                        "md" => 1
-                    ])
-                    ->afterStateUpdated(
-                        fn (callable $set) => $set("semester", null)
-                    )
-                    ->required(),
-                Forms\Components\Select::make("semester_id")
-                    ->relationship("semester", "name")
-                    ->reactive()
-                    ->columnSpan([
-                        "md" => 1
-                    ])
-                    ->afterStateUpdated(
-                        fn (callable $set) => $set("subject_id", null)
-                    )
-                    ->required(),
-                Forms\Components\Select::make("student_id")
-                    ->relationship("student", "name")
-                    ->reactive()
-                    ->columnSpan([
-                        "md" => 1
-                    ])
-                    ->required()
-                    ->afterStateUpdated(function (callable $get) {
+                                Notification::make()
+                                    ->title("Student already has a result in this semester")
+                                    ->danger()
+                                    ->send();
 
-                        $result = Result::where("semester_id", $get("semester_id"))
-                            ->where("student_id", $get("student_id"))->count();
+                                return back();
+                            }
+                        }),
+                    Forms\Components\TextInput::make("average")
+                        ->columnSpan([
+                            "md" => 1
+                        ])
+                        ->label("Percentage %")
+                        ->disabled(),
 
-                        if ($result != 0) {
-
-                            Notification::make()
-                                ->title("Student already has a result in this semester")
-                                ->danger()
-                                ->send();
-
-                            return back();
-                        }
-                    }),
-                Forms\Components\TextInput::make("average")
-                    ->columnSpan([
-                        "md" => 1
-                    ])
-                    ->label("Percentage %")
-                    ->disabled(),
-
-                Forms\Components\Card::make()->schema([
-                    Forms\Components\Placeholder::make('Result details'),
-                    Forms\Components\Repeater::make('details')
-                        ->label("subjects")
-                        ->relationship('details')
-                        ->schema([
-                            Forms\Components\Select::make('subject_id')
+                    Forms\Components\Card::make()->schema(
+                        [
+                            Forms\Components\Placeholder::make('Result details'),
+                            Forms\Components\Repeater::make('details')
                                 ->label("subjects")
-                                ->reactive()
-                                ->required()
-                                ->options(
-                                    function (callable $get) {
+                                ->relationship('details')
+                                ->schema([
+                                    Forms\Components\Select::make('subject_id')
+                                        ->label("subjects")
+                                        ->reactive()
+                                        ->required()
+                                        ->options(
+                                            function (callable $get) {
 
-                                        $semester = Semester::find($get("../../semester_id"));
+                                                $semester = Semester::find($get("../../semester_id"));
+                                                if ($semester) {
+                                                    return $semester->subjects
+                                                        // ->whereNotIn("subject_id", "<>", $get("subject_id"))
+                                                        ->pluck("name", "id");
+                                                } else {
+
+                                                    return [];
+                                                }
+                                            }
+                                        ),
+                                    Forms\Components\TextInput::make('avarege')
+                                        ->required()
+                                        ->minValue(0)
+                                        ->maxValue(100),
+
+                                ])->minItems(
+                                    function (callable $get) {
+                                        $semester = Semester::find($get("semester_id"));
                                         if ($semester) {
                                             return $semester->subjects
-                                                // ->whereNotIn("subject_id", "<>", $get("subject_id"))
-                                                ->pluck("name", "id");
+                                                ->count();
                                         } else {
 
-                                            return [];
+                                            return 0;
                                         }
                                     }
                                 )
-                            // ->relationship("subjects","name")
-                            ,
-                            Forms\Components\TextInput::make('avarege')
-                                ->required()
-                                ->minValue(0)
-                                ->maxValue(100),
+                        ]
+                    ),
 
-                        ])->minItems(function (callable $get) {
-                            $semester = Semester::find($get("semester_id"));
-                            if ($semester) {
-                                return $semester->subjects
-                                    ->count();
-                            } else {
-
-                                return 0;
-                            }
-                        })
-
-
-
-
-                ]),
-
-
-
-
-
-            ]);
+                ]
+            );
     }
 
     public static function table(Table $table): Table
@@ -170,7 +165,6 @@ class ResultResource extends Resource
                 Tables\Columns\TextColumn::make('semester.name'),
                 Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
                 Tables\Columns\TextColumn::make('semester.acadimicyear.department.name'),
-
             ])
             ->filters([
                 //

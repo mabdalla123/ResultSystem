@@ -11,12 +11,7 @@ class AcadimicYear extends Model
 
     protected $fillable = [
         "name",
-        "department_id",
-        "current"
-    ];
-
-    protected $cast = [
-        "current"=>"boolean"
+        "department_id"
     ];
 
     public function department()

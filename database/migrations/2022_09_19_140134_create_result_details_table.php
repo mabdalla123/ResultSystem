@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Result::class);
             $table->foreignIdFor(Subject::class);
             $table->double("avarege");
+            $table->double("student_certified_hours");
             $table->timestamps();
         });
     }

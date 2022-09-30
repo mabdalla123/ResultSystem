@@ -12,9 +12,13 @@ class Subject extends Model
 
     protected $fillable = [
         "name",
+        "certified_hours",
         "semester_id",
-        "credit_hours"
 
+    ];
+
+    protected $cast=[
+        "certified_hours"=>"double"
     ];
 
 

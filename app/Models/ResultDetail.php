@@ -12,6 +12,7 @@ class ResultDetail extends Model
     protected $fillable = [
         "result_id",
         "subject_id",
+        "student_certified_hours",
         "avarege"
     ];
 

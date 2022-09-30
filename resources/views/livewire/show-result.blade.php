@@ -1,5 +1,11 @@
 <div>
-
+    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    {{-- <div class="">
+        {{ $this->form }}
+    </div>
+    <div>
+        {{ $this->table }}
+    </div> --}}
 
     <div class="min-h-full">
         <nav class="bg-gray-800">

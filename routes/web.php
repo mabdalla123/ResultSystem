@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', SearchTable::class);
-Route::get('/showResult/{result}', ShowResult::class)->name("showresult");
+Route::get('/showResult/{Result}', ShowResult::class)->name("showResult");

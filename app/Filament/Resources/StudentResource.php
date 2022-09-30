@@ -3,27 +3,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-
-
-
 
 class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
     protected static ?string $navigationGroup = 'Student';
-
-    protected static ?string $recordTitleAttribute = "name";
-
 
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -34,7 +25,7 @@ class StudentResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make("name"),
-                Forms\Components\Select::make("department_id")->relationship('department', 'name'),
+                Forms\Components\Select::make("department_id")->relationship('department','name'),
             ]);
     }
 
@@ -72,6 +63,4 @@ class StudentResource extends Resource
             'edit' => Pages\EditStudent::route('/{record}/edit'),
         ];
     }
-
-
 }

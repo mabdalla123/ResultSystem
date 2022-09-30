@@ -17,13 +17,14 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
 
 {
 
+    use Tables\Concerns\InteractsWithTable;
+    use InteractsWithForms;
+
     public $department;
     public $acadimicyear;
     public $semester;
     public $student;
 
-    use Tables\Concerns\InteractsWithTable;
-    use InteractsWithForms;
     public function render()
     {
         return view('livewire.search-table');
@@ -38,6 +39,7 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
             })
                 ->reactive()
                 ->label("Department"),
+
             Select::make("acadimicyear")
                 ->label("AcadimicYear")
                 ->reactive()
@@ -106,13 +108,15 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
             Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
             Tables\Columns\TextColumn::make('semester.acadimicyear.department.name'),
             Tables\Columns\TextColumn::make('average'),
+            // Tables\Columns\TextColumn::make('id')
+            // ->label("Show")
+            // ->formatStateUsing(fn (string $state): string => $state),
 
         ];
     }
 
-
     protected function getTableRecordUrlUsing()
     {
-        return fn (Result $record): string => route('showresult', ['Result' => $record]);
+        return fn (Result $record): string => route("showResult", ['Result' => $record]);
     }
 }

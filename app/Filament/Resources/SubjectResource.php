@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubjectResource\Pages;
-use App\Filament\Resources\SubjectResource\RelationManagers;
 use App\Models\Subject;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubjectResource extends Resource
 {
@@ -27,7 +24,7 @@ class SubjectResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make("name"),
-                Forms\Components\TextInput::make("credit_hours"),
+                Forms\Components\TextInput::make("certified_hours"),
                 Forms\Components\Select::make("semester_id")->relationship('semester','name'),
 
 
@@ -44,7 +41,7 @@ class SubjectResource extends Resource
                 Tables\Columns\TextColumn::make('semester.name'),
                 Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('credit_hours'),
+                Tables\Columns\TextColumn::make('certified_hours'),
 
             ])
             ->filters([

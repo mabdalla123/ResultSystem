@@ -3,16 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AcadimicYearResource\Pages;
-use App\Filament\Resources\AcadimicYearResource\RelationManagers;
 use App\Models\AcadimicYear;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Table as TablesTable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class AcadimicYearResource extends Resource
 {
@@ -26,9 +23,7 @@ class AcadimicYearResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("name")->disabled(
-                    fn($context) : bool=> $context === "edit"),
-                Forms\Components\Checkbox::make("current"),
+                Forms\Components\TextInput::make("name"),
                 Forms\Components\Select::make("department_id")->relationship("department","name"),
 
             ]);
@@ -40,9 +35,7 @@ class AcadimicYearResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('department.name'),
-                Tables\Columns\BooleanColumn::make("current"),
-
+                Tables\Columns\TextColumn::make('department.name')
             ])
             ->filters([
                 //

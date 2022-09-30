@@ -17,12 +17,19 @@ return new class extends Migration
     {
         Schema::create('result_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Result::class);
-            $table->foreignIdFor(Subject::class);
+
             $table->double("avarege");
-            $table->string ("mark")->nullable();
-            $table->double ("point")->nullable();
+            $table->string("mark")->nullable();
+            $table->double("point")->nullable();
             $table->double("student_certified_hours");
+
+            //Relationship
+            $table->foreignIdFor(Result::class)
+                ->onDelete('cascade');
+
+            $table->foreignIdFor(Subject::class)
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

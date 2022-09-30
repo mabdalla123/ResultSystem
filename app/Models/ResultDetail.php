@@ -13,11 +13,16 @@ class ResultDetail extends Model
         "result_id",
         "subject_id",
         "student_certified_hours",
-        "avarege"
+        "avarege",
+        "mark",
+        "poin",
+
     ];
 
     protected $cast = [
-        "avarege"=>"double"
+        "avarege"=>"double",
+        "point"=>"double",
+
     ];
 
     public function reslut()

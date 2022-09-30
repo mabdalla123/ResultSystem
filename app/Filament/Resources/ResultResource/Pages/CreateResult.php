@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ResultResource\Pages;
 
+use App\Actions\Result\ResultActions;
 use App\Filament\Resources\ResultResource;
 use App\Models\Result;
 use Exception;
@@ -15,22 +16,8 @@ class CreateResult extends CreateRecord
 
     protected function afterCreate(): void
     {
-        $sum = 0;
-        $data =  $this->record->details->map(function ($detail) use ($sum) {
-            return  $sum += $detail->avarege;
-        });
-
-        foreach ($data as $item) {
-            $sum += $item;
-        }
-
-        $fullmark = count($data) * 100;
-
-        $finalAvarege = $sum / $fullmark * 100;
-
-        $this->record->average = $finalAvarege;
-
-        $this->record->save();
+        //calculate total Avarage
+        ResultActions::SetTotalAverage( $this->record);
     }
 
 }

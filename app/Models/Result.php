@@ -21,6 +21,13 @@ class Result extends Model
         "average"=>"double"
     ];
 
+
+
+
+
+
+    ///relationships
+
     public function student()
     {
         return $this->belongsTo(Student::class);
@@ -35,9 +42,4 @@ class Result extends Model
     {
         return $this->hasMany(ResultDetail::class);
     }
-
-
-
-
-
 }

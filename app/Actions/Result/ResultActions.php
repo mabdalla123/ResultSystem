@@ -56,5 +56,6 @@ public static function SetResultDetailsMarkPoint(ResultDetail $detail)
         $result->average = $total_point_hour/$total_hours;
         $result->save();
 
+
     }
 }

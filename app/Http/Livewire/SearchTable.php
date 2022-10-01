@@ -86,11 +86,6 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
                         }
                     }
                 ),
-
-
-
-
-
         ];
     }
 
@@ -108,9 +103,6 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
             Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
             Tables\Columns\TextColumn::make('semester.acadimicyear.department.name'),
             Tables\Columns\TextColumn::make('average'),
-            // Tables\Columns\TextColumn::make('id')
-            // ->label("Show")
-            // ->formatStateUsing(fn (string $state): string => $state),
 
         ];
     }

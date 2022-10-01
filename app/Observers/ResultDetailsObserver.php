@@ -28,6 +28,7 @@ class ResultDetailsObserver
     public function updated(ResultDetail $resultDetail)
     {
         //
+        ResultActions::SetResultDetailsMarkPoint($resultDetail);
     }
 
     /**

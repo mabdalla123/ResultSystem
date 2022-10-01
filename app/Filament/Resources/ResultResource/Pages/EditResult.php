@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\ResultResource\Pages;
 
-use App\Filament\Resources\ResultResource;
 use Filament\Pages\Actions;
+use App\Actions\Result\ResultActions;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\ResultResource;
 
 class EditResult extends EditRecord
 {
@@ -15,19 +16,8 @@ class EditResult extends EditRecord
     {
         // calculate persentage
 
-        $sum = 0;
-        $data =  $this->record->details->map(function ($detail) use ($sum){ return  $sum +=$detail->avarege;});
+        ResultActions::SetTotalAverage($this->record);
 
-        foreach($data as $item){
-            $sum+=$item;
-        }
-
-        $fullmark = count($data)*100;
-
-        $finalAvarege = $sum/$fullmark*100;
-
-        $this->record->average= $finalAvarege;
-        $this->record->save();
     }
 
 

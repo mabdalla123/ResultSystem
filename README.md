@@ -13,6 +13,6 @@ TODO:
 
 <ul>
     <li>Add Design for Student view Results</li>
-    <li>Admin can Link Two subjects in deferente semesters</li>
+    <li>Admin can Link Two subjects in diferente semesters</li>
     
 </ul>

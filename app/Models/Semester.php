@@ -11,11 +11,14 @@ class Semester extends Model
 
     protected $fillable = [
         "name",
-        "acadimic_year_id"
+        "acadimic_year_id",
+        "is_available_for_students"
     ];
 
     protected $cast = [
-        "subjects"=>"array"
+        "subjects"=>"array",
+        "is_available_for_students"=>"boolean",
+
     ];
 
     public function acadimicyear()

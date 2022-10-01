@@ -14,5 +14,5 @@ TODO:
 <ul>
     <li>Add Design for Student view Results</li>
     <li>Admin can Link Two subjects in deferente semesters</li>
-    <li>Admin Can Determen when a student can view there Results</li>
+    
 </ul>

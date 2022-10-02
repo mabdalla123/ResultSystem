@@ -98,11 +98,11 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
     protected function getTableColumns(): array
     {
         return [
+            Tables\Columns\TextColumn::make('average'),
             Tables\Columns\TextColumn::make('student.name'),
             Tables\Columns\TextColumn::make('semester.name'),
             Tables\Columns\TextColumn::make('semester.acadimicyear.name'),
             Tables\Columns\TextColumn::make('semester.acadimicyear.department.name'),
-            Tables\Columns\TextColumn::make('average'),
 
         ];
     }

@@ -20,4 +20,6 @@ class CreateResult extends CreateRecord
         ResultActions::SetTotalAverage( $this->record);
     }
 
+
+
 }

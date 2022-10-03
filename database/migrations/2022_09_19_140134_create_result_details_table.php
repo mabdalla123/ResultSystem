@@ -19,8 +19,8 @@ return new class extends Migration
             $table->id();
 
             $table->double("avarege");
-            $table->string("mark")->nullable();
-            $table->double("point")->nullable();
+            $table->string("mark");
+            $table->double("point");
             $table->double("student_certified_hours");
 
             //Relationship

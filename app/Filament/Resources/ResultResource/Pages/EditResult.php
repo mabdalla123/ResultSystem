@@ -15,7 +15,6 @@ class EditResult extends EditRecord
     protected function afterSave(): void
     {
         // calculate persentage
-
         ResultActions::SetTotalAverage($this->record);
 
     }

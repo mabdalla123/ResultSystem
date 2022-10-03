@@ -15,7 +15,7 @@ class ResultDetail extends Model
         "student_certified_hours",
         "avarege",
         "mark",
-        "poin",
+        "point",
 
     ];
 

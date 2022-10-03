@@ -79,14 +79,14 @@ class ResultResource extends Resource
                     ->columnSpan([
                         "md" => 1
                     ])
-                    ->label("Percentage %")
+                    ->label("Semester Average")
                     ->disabled(),
 
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Placeholder::make('Result details'),
                     Forms\Components\Repeater::make('details')
                         ->label("subjects")
-                        ->relationship('details')
+                        ->relationship()
                         ->schema([
                             Forms\Components\Select::make('subject_id')
                                 ->label("subjects")
@@ -101,9 +101,7 @@ class ResultResource extends Resource
                                                 ->pluck("name", "id");
                                         } else {
 
-                                            return [
-
-                                            ];
+                                            return [];
                                         }
                                     }
                                 ),
@@ -111,9 +109,43 @@ class ResultResource extends Resource
                             Forms\Components\TextInput::make('avarege')
                                 ->required()
                                 ->minValue(0)
-                                ->maxValue(100),
+                                ->maxValue(100)
+                                ->afterStateUpdated(function ($state, callable $set) {
+
+                                    if ($state >= 80 && $state <= 100) {
+                                        $set("mark", "A");
+                                        $set("point", 6);
+                                    } else if ($state >= 70 && $state <= 79) {
+                                        $set("mark", "B+");
+                                        $set("point", 5);
+                                    } else if ($state >= 60 && $state <= 69) {
+                                        $set("mark", "B");
+                                        $set("point", 4);
+                                    } else if ($state >= 55 && $state <= 59) {
+                                        $set("mark", "C+");
+                                        $set("point", 3.5);
+                                    } else if ($state >= 50 && $state <= 54) {
+                                        $set("mark", "C");
+                                        $set("point", 3);
+                                    } else if ($state >= 40 && $state <= 49) {
+                                        $set("mark", "D");
+                                        $set("point", 2.4);
+                                    } else if ($state < 40) {
+                                        $set("mark", "F");
+                                        $set("point", 0);
+                                    }
+                                }),
                             Forms\Components\TextInput::make('student_certified_hours')
                                 ->required(),
+
+                            Forms\Components\TextInput::make('mark')
+                                ->hidden()
+                                ->reactive(),
+
+                            Forms\Components\TextInput::make('point')
+                                ->hidden()
+                                ->reactive(),
+
 
                         ])->minItems(function (callable $get) {
                             $semester = Semester::find($get("semester_id"));

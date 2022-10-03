@@ -9,37 +9,7 @@ use HtmlSanitizer\Extension\Details\Node\DetailsNode;
 class ResultActions
 {
 
-public static function SetResultDetailsMarkPoint(ResultDetail $detail)
-    {
-        // dd($result);
-        //for each details set the mark and Point
 
-            if ($detail->avarege >= 80 && $detail->avarege <= 100) {
-                $detail->mark = "A";
-                $detail->point = 6;
-            } else if ($detail->avarege >= 70 && $detail->avarege <= 79) {
-                $detail->mark = "B+";
-                $detail->point =  5;
-            } else if ($detail->avarege >= 60 && $detail->avarege <= 69) {
-                $detail->mark = "B";
-                $detail->point = 4;
-            } else if ($detail->avarege >= 55 && $detail->avarege <= 59) {
-                $detail->mark = "C+";
-                $detail->point = 3.5;
-            } else if ($detail->avarege >= 50 && $detail->avarege <= 54) {
-                $detail->mark = "C";
-                $detail->point = 3;
-            } else if ($detail->avarege >= 40 && $detail->avarege <= 49) {
-                $detail->mark = "D";
-                $detail->point = 2.4;
-            } else if ($detail->avarege < 40) {
-                $detail->mark = "F";
-                $detail->point = 0;
-            }
-
-            $detail->save();
-
-    }
 
     public static function SetTotalAverage(Result $result)
     {
@@ -54,6 +24,7 @@ public static function SetResultDetailsMarkPoint(ResultDetail $detail)
         }
 
         $result->average = $total_point_hour/$total_hours;
+
         $result->save();
 
 

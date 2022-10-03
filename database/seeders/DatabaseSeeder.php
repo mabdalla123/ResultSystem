@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Http\Enums\UserType;
 use App\Models\AcadimicYear;
 use App\Models\Department;
 use App\Models\Semester;
@@ -26,7 +27,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password'=>Hash::make('admin123')
+            'password'=>Hash::make('admin123'),
+            'UserType'=>UserType::ADMIN,
         ]);
 
 

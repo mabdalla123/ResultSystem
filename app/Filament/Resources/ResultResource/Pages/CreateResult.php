@@ -16,8 +16,13 @@ class CreateResult extends CreateRecord
 
     protected function afterCreate(): void
     {
-        //calculate total git
-        ResultActions::SetTotalAverage( $this->record);
+        //check if Result is Created with all it's Details
+
+        if(ResultActions::checkCreatedSuccssfuly($this->record)){
+
+            //calculate total Average
+            ResultActions::SetTotalAverage( $this->record);
+        }
     }
 
 

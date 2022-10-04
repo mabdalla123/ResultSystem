@@ -29,4 +29,16 @@ class ResultActions
 
 
     }
+
+
+    public static function checkCreatedSuccssfuly(Result $result):bool
+    {
+        #checking
+        if(!$result->details || count($result->details)>0){
+            //remove this result
+            $result->delete();
+            return false;
+        }
+        return true;
+    }
 }

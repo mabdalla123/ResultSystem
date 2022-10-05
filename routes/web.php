@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', SearchTable::class);
-
-Route::get('/showResult/{Result}', ShowResult::class)
-    ->middleware("isSemesterResultAvilableForStudents")
-    ->name("showResult");
+// Route::get('/', SearchTable::class);
+//
+// Route::get('/showResult/{Result}', ShowResult::class)
+//     ->middleware("isSemesterResultAvilableForStudents")
+//     ->name("showResult");

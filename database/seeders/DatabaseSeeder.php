@@ -27,29 +27,28 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password'=>Hash::make('admin123'),
-            'UserType'=>UserType::ADMIN,
+            'password' => bcrypt('admin123'),
+            'UserType' => UserType::ADMIN,
         ]);
 
 
-        $dept=Department::factory()->create();
+        $dept = Department::factory()->create();
 
         Student::factory([
-            "department_id"=>$dept->id
+            "department_id" => $dept->id
         ])->count(10)->create();
 
         $acadimicyear = AcadimicYear::factory([
-            "department_id"=>$dept->id
+            "department_id" => $dept->id
         ])->create();
 
-        $Semester =Semester::factory([
-            "acadimic_year_id"=>$acadimicyear->id
+        $Semester = Semester::factory([
+            "acadimic_year_id" => $acadimicyear->id
         ])->create();
 
         Subject::factory([
-            "semester_id"=>$Semester->id,
-            "certified_hours"=>3
+            "semester_id" => $Semester->id,
+            "certified_hours" => 3
         ])->count(4)->create();
-
     }
 }

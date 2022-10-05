@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Actions\Result\ResultActions;
 use App\Filament\Resources\ResultResource\Pages;
 use App\Filament\Resources\ResultResource\RelationManagers;
 use App\Models\Department;
@@ -104,7 +105,11 @@ class ResultResource extends Resource
                                             return [];
                                         }
                                     }
-                                ),
+                                )
+                                ->afterStateUpdated(function($state,callable $set){
+                                    $subject = Subject::find($state);
+                                    $set("subject_certified_hours",$subject->certified_hours);
+                                }),
 
                             Forms\Components\TextInput::make('avarege')
                                 ->required()
@@ -145,6 +150,10 @@ class ResultResource extends Resource
                             Forms\Components\TextInput::make('point')
                                 ->hidden()
                                 ->reactive(),
+                                Forms\Components\TextInput::make('subject_certified_hours')
+                                ->hidden()
+                                ->reactive(),
+
 
 
                         ])->minItems(function (callable $get) {
@@ -198,5 +207,10 @@ class ResultResource extends Resource
             'create' => Pages\CreateResult::route('/create'),
             'edit' => Pages\EditResult::route('/{record}/edit'),
         ];
+    }
+
+    protected function mutateFormDataBeforeCreate (array $array):array
+    {
+        return ResultActions::SetTotalAverage($array);
     }
 }

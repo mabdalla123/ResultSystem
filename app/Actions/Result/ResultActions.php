@@ -11,21 +11,21 @@ class ResultActions
 
 
 
-    public static function SetTotalAverage(Result $result)
+    public static function SetTotalAverage(array $result):array
     {
         //(subjectPoint*StudentCertifiedHour)/TotalHours
         $total_hours = 0;
 
         $total_point_hour =0 ;
 
-        foreach($result->details as $detail){
-            $total_point_hour+= $detail->student_certified_hours  *  $detail->point;
-            $total_hours += $detail->subject->certified_hours;
+        foreach($result["details"] as $detail){
+            $total_point_hour+= $detail["student_certified_hours"]  *  $detail["point"];
+            $total_hours += $detail["subject_certified_hours"];
         }
 
-        $result->average = $total_point_hour/$total_hours;
+        $result["average"] = $total_point_hour/$total_hours;
 
-        $result->save();
+        return $result;
 
 
     }

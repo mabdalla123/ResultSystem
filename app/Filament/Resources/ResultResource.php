@@ -56,6 +56,7 @@ class ResultResource extends Resource
                     ->required(),
                 Forms\Components\Select::make("student_id")
                     ->relationship("student", "name")
+                    ->searchable()
                     ->reactive()
                     ->columnSpan([
                         "md" => 1

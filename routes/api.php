@@ -26,7 +26,9 @@ Route::prefix('v1')->group(function () {
 
     Route::post('department/create', App\Http\Controllers\Api\v1\Department\create::class);
 
-    Route::put('department/{department}', App\Http\Controllers\Api\v1\Department\edit::class);
+    Route::get('department/{department}', App\Http\Controllers\Api\v1\Student\Show::class);
+
+    Route::put('department/{department}/edit', App\Http\Controllers\Api\v1\Department\edit::class);
 
     Route::delete('department/{department}', App\Http\Controllers\Api\v1\Department\delete::class);
 
@@ -43,7 +45,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post('student/create', App\Http\Controllers\Api\v1\Student\Create::class);
 
-    Route::put('student/{student}', App\Http\Controllers\Api\v1\Student\Edit::class);
+    Route::put('student/{student}/edit', App\Http\Controllers\Api\v1\Student\Edit::class);
 
     Route::delete('student/{student}', App\Http\Controllers\Api\v1\Student\Delete::class);
 

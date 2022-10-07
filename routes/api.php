@@ -30,7 +30,7 @@ Route::prefix('v1')->group(function () {
 
     Route::put('department/{department}/edit', App\Http\Controllers\Api\v1\Department\edit::class);
 
-    Route::delete('department/{department}', App\Http\Controllers\Api\v1\Department\delete::class);
+    Route::delete('department/{department}/delete', App\Http\Controllers\Api\v1\Department\delete::class);
 
     /**
      * End Of department Controller
@@ -47,10 +47,27 @@ Route::prefix('v1')->group(function () {
 
     Route::put('student/{student}/edit', App\Http\Controllers\Api\v1\Student\Edit::class);
 
-    Route::delete('student/{student}', App\Http\Controllers\Api\v1\Student\Delete::class);
+    Route::delete('student/{student}/delete', App\Http\Controllers\Api\v1\Student\Delete::class);
 
     /**
      * End Student Controller
+     */
+
+     /**
+     * AcadimicYear Controller
+     */
+    Route::get('acadimicyear', App\Http\Controllers\Api\v1\AcadimicYear\Index::class);
+
+    Route::get('acadimicyear/{acadimicYear}', App\Http\Controllers\Api\v1\AcadimicYear\Show::class);
+
+    Route::post('acadimicyear/create', App\Http\Controllers\Api\v1\AcadimicYear\Create::class);
+
+    Route::put('acadimicyear/{acadimicYear}/edit', App\Http\Controllers\Api\v1\AcadimicYear\Edit::class);
+
+    Route::delete('acadimicyear/{acadimicYear}/delete', App\Http\Controllers\Api\v1\AcadimicYear\Delete::class);
+
+    /**
+     * End AcadimicYear Controller
      */
 });
 // });

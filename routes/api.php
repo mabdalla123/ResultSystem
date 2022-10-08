@@ -86,5 +86,24 @@ Route::prefix('v1')->group(function () {
     /**
      * End Semester Controller
      */
+
+     /**
+     * Semester Controller
+     */
+    Route::get('subject', App\Http\Controllers\Api\v1\Subject\Index::class);
+
+    Route::get('subject/{subject}', App\Http\Controllers\Api\v1\Subject\Show::class);
+
+    Route::post('subject/create', App\Http\Controllers\Api\v1\Subject\Create::class);
+
+    Route::put('subject/{subject}/edit', App\Http\Controllers\Api\v1\Subject\Edit::class);
+
+    Route::delete('subject/{subject}/delete', App\Http\Controllers\Api\v1\Subject\Delete::class);
+
+    /**
+     * End Semester Controller
+     */
+
+
 });
 // });

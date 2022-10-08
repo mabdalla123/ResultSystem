@@ -53,7 +53,7 @@ Route::prefix('v1')->group(function () {
      * End Student Controller
      */
 
-     /**
+    /**
      * AcadimicYear Controller
      */
     Route::get('acadimicyear', App\Http\Controllers\Api\v1\AcadimicYear\Index::class);
@@ -68,6 +68,23 @@ Route::prefix('v1')->group(function () {
 
     /**
      * End AcadimicYear Controller
+     */
+
+    /**
+     * Semester Controller
+     */
+    Route::get('semester', App\Http\Controllers\Api\v1\Semester\Index::class);
+
+    Route::get('semester/{semester}', App\Http\Controllers\Api\v1\Semester\Show::class);
+
+    Route::post('semester/create', App\Http\Controllers\Api\v1\Semester\Create::class);
+
+    Route::put('semester/{semester}/edit', App\Http\Controllers\Api\v1\Semester\Edit::class);
+
+    Route::delete('semester/{semester}/delete', App\Http\Controllers\Api\v1\Semester\Delete::class);
+
+    /**
+     * End Semester Controller
      */
 });
 // });

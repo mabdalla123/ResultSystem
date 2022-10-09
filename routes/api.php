@@ -87,7 +87,7 @@ Route::prefix('v1')->group(function () {
      * End Semester Controller
      */
 
-     /**
+    /**
      * Semester Controller
      */
     Route::get('subject', App\Http\Controllers\Api\v1\Subject\Index::class);
@@ -104,6 +104,43 @@ Route::prefix('v1')->group(function () {
      * End Semester Controller
      */
 
+    /**
+     * End Semester Controller
+     */
 
+    /**
+     * Result Controller
+     */
+    Route::get('result', App\Http\Controllers\Api\v1\Result\Index::class);
+
+    Route::get('result/{result}', App\Http\Controllers\Api\v1\Result\Show::class);
+
+    Route::post('result/create', App\Http\Controllers\Api\v1\Result\Create::class);
+
+    Route::put('result/{result}/edit', App\Http\Controllers\Api\v1\Result\Edit::class);
+
+    Route::delete('result/{result}/delete', App\Http\Controllers\Api\v1\Result\Delete::class);
+
+    /**
+     * Result Details Controller
+     */
+    Route::get('result/{result}/detail', App\Http\Controllers\Api\v1\Result\Detail\Index::class);
+
+    // Route::post('result/create', App\Http\Controllers\Api\v1\Result\Create::class);
+
+    Route::get('result/{result}/detail/{resultDetail}', App\Http\Controllers\Api\v1\Result\Detail\Show::class);
+
+    Route::put('result/{result}/detail/{resultDetail}/edit', App\Http\Controllers\Api\v1\Result\Detail\Edit::class);
+
+    Route::delete('result/{result}/detail/{resultDetail}/delete', App\Http\Controllers\Api\v1\Result\Detail\Delete::class);
+
+
+    /**
+     * End Result Details Controller
+     */
+
+    /**
+     * End Result Controller
+     */
 });
 // });

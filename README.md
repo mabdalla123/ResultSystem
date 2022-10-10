@@ -9,10 +9,3 @@ Features:
     <li>Students can View Results</li>
 </ul>
 
-TODO:
-
-<ul>
-    <li>Add Design for Student view Results</li>
-    <li>Admin can Link Two subjects in diferente semesters</li>
-    
-</ul>

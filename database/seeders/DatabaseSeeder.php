@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+/*
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
@@ -50,5 +51,6 @@ class DatabaseSeeder extends Seeder
             "semester_id" => $Semester->id,
             "certified_hours" => 3
         ])->count(4)->create();
+        */
     }
 }

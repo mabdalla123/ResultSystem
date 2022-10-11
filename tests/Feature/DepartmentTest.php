@@ -7,6 +7,10 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\put;
 
+/**
+ * Crud Operation
+ */
+
 it("can load department End point correctly", function () {
     $response = $this->get("/api/v1/department");
     $response->assertSuccessful()
@@ -15,7 +19,11 @@ it("can load department End point correctly", function () {
 
 it("can Create a department", function () {
 
-    $dept = Department::factory()->raw();
+    $dept = Department::factory()->raw(
+        [
+            "name"=>"TestDepartment"
+        ]
+    );
     $response =  postJson(
         "/api/v1/department/create",
         $dept
@@ -53,3 +61,43 @@ it("can delete Departments", function () {
             "Message" => "Item Deleted"
         ]);
 });
+
+
+/**
+ * End Crud Operation
+ */
+
+/**
+ * Test Create Rules
+ */
+
+it("cant create a department if name is not provided ",function(){
+   
+    $response =  postJson(
+        "/api/v1/department/create",
+        [
+            "name"=>""
+        ]
+    )
+        ->assertStatus(422);
+        
+
+});
+
+it("should not create a department if name contains a Number",function(){
+   
+   $dept = Department::factory([
+            "name"=>"Test123"
+        ])->raw();
+    $response =  postJson(
+        "/api/v1/department/create",
+        $dept
+    )
+        ->assertStatus(422);
+        
+
+});
+/**
+ * End Test Create Rules
+ */
+

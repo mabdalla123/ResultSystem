@@ -18,7 +18,7 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            "name"=>"IT",
+            "name"=>$this->faker->firstName,
             // "acadimicyear_id"=>AcadimicYear::factory()
         ];
     }

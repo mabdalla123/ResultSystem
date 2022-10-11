@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use App\Models\Department;
 
@@ -19,11 +19,7 @@ it("can load department End point correctly", function () {
 
 it("can Create a department", function () {
 
-    $dept = Department::factory()->raw(
-        [
-            "name"=>"TestDepartment"
-        ]
-    );
+    $dept = Department::factory()->raw();
     $response =  postJson(
         "/api/v1/department/create",
         $dept
@@ -42,14 +38,11 @@ it("can show a Department", function () {
 
 it("can edit a Department", function () {
 
-    $dept = Department::factory()->create();
-    $response =  put("/api/v1/department/" . $dept->id . "/edit", [
-        "name" => "test"
-    ])
+    $dept = Department::first();
+    $data = Department::factory()->raw();
+    $response =  put("/api/v1/department/" . $dept->id . "/edit",$data)
         ->assertStatus(200)
-        ->assertSee([
-            "name" => "test"
-        ]);
+        ->assertSee($data);
 });
 
 it("can delete Departments", function () {

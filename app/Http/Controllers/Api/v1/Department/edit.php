@@ -11,11 +11,16 @@ class edit extends Controller
 {
     public function __invoke(EditRequest $request,Department $department)
     {
+        try{
         $department->update($request->validated());
-        return response([
+        return response(
+            [
             "department"=>$department
-        ],
+            ],
         200
     );
+    }catch(Excption $ex){
+        return response($ex);
+    }
     }
 }

@@ -33,7 +33,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        $dept = Department::factory()->create();
+        $dept = Department::factory([
+            "name"=>"IT"
+        ])->create();
 
         Student::factory([
             "department_id" => $dept->id

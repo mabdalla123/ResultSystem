@@ -25,7 +25,7 @@ class StudentUpdateRequest extends FormRequest
     {
         return [
             "name"=>"alpha",
-            "department_id"=>"exists:departments,id"
+            "department_id"=>"exists:departments,id|numeric"
         ];
     }
 }

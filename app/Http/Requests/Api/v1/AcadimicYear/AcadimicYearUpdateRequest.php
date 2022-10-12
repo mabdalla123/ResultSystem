@@ -24,8 +24,8 @@ class AcadimicYearUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"alpha",
-            "department_id"=>"exists:departments,id"
+            "name"=>"unique:acadimic_years,name",
+            "department_id"=>"exists:departments,id|numeric"
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class AcadimicYearFactory extends Factory
     public function definition()
     {
         return [
-            "name"=> "2020/2021",
+            "name"=> $this->faker->bothify("####/####"),
+            "department_id"=>Department::factory()
         ];
     }
 }

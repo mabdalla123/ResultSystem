@@ -25,7 +25,7 @@ class StudentCreateRequest extends FormRequest
     {
         return [
             "name"=>"required|alpha",
-            "department_id"=>"required|exists:departments,id"
+            "department_id"=>"required|exists:departments,id|numeric"
         ];
     }
 }

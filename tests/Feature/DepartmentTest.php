@@ -94,3 +94,31 @@ it("should not create a department if name contains a Number",function(){
  * End Test Create Rules
  */
 
+/**
+ * Test Update Rules
+ */
+it("cant edit if Department contain numbers", function () {
+
+    $dept = Department::first();
+    $data = [
+        "name"=>"Test123"
+    ];
+    $response =  put("/api/v1/department/" . $dept->id . "/edit",$data)
+        ->assertStatus(302);
+        
+});
+
+it("cant edit if Department name is not unique", function () {
+
+    $dept = Department::first();
+    
+    $response =  put("/api/v1/department/" . $dept->id . "/edit",[
+        "name"=>$dept->name
+    ])
+        ->assertStatus(302);
+        
+});
+
+/**
+ * End Test Update Rules
+ */

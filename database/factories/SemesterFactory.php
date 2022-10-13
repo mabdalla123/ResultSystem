@@ -18,7 +18,7 @@ class SemesterFactory extends Factory
     public function definition()
     {
         return [
-            "name"=>$this->faker->regexify("[a-z]"),
+            "name"=>$this->faker->regexify("^[a-zA-Z]{0,12}$"),
             "acadimic_year_id"=>AcadimicYear::factory(),
             "is_available_for_students"=>false
         ];

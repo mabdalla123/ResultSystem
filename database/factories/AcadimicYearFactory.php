@@ -19,7 +19,7 @@ class AcadimicYearFactory extends Factory
     public function definition()
     {
         return [
-            "name"=> $this->faker->bothify("####/####"),
+            "name"=>$this->faker->regexify("^[a-zA-Z]{0,12}$"),
             "department_id"=>Department::factory()
         ];
     }

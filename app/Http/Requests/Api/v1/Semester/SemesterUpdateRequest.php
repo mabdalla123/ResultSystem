@@ -25,7 +25,7 @@ class SemesterUpdateRequest extends FormRequest
     {
         return [
             "name"=>"alpha",
-            "acadimic_year_id"=>"exists:acadimic_years,id",
+            "acadimic_year_id"=>"exists:acadimic_years,id|numeric",
             "is_available_for_students"=>"boolean",
         ];
     }

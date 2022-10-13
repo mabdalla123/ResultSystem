@@ -19,9 +19,10 @@ class isSemesterResultAvilableForStudents
     {
         $result = $request->route()->parameter('Result');
         $result = Result::find($result);
-        if ($result->semester->is_available_for_students)
+        if ($result->semester->is_available_for_students) {
             return $next($request);
-        else
+        } else {
             return abort(403);
+        }
     }
 }

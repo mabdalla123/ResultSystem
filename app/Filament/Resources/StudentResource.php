@@ -16,7 +16,6 @@ class StudentResource extends Resource
 
     protected static ?string $navigationGroup = 'Student';
 
-
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
@@ -24,8 +23,8 @@ class StudentResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make("name"),
-                Forms\Components\Select::make("department_id")->relationship('department','name'),
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\Select::make('department_id')->relationship('department', 'name'),
             ]);
     }
 

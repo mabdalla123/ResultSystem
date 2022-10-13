@@ -24,8 +24,8 @@ class StudentCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|alpha",
-            "department_id"=>"required|exists:departments,id|numeric"
+            'name' => 'required|alpha',
+            'department_id' => 'required|exists:departments,id|numeric',
         ];
     }
 }

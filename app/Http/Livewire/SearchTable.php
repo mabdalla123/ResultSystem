@@ -2,27 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use Filament\Tables;
-use App\Models\Result;
-use Livewire\Component;
-use App\Models\Department;
 use App\Models\AcadimicYear;
+use App\Models\Department;
+use App\Models\Result;
 use Filament\Forms\Components\Select;
-
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Tables;
+use Livewire\Component;
 
-class SearchTable extends Component  implements Tables\Contracts\HasTable, HasForms
-
+class SearchTable extends Component implements Tables\Contracts\HasTable, HasForms
 {
-
     use Tables\Concerns\InteractsWithTable;
     use InteractsWithForms;
 
     public $department;
+
     public $acadimicyear;
+
     public $semester;
+
     public $student;
 
     public function render()
@@ -34,53 +33,50 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
     {
         return [
 
-            Select::make("department")->options(function () {
-                return Department::all()->pluck("name", "id");
+            Select::make('department')->options(function () {
+                return Department::all()->pluck('name', 'id');
             })
                 ->reactive()
-                ->label("Department"),
+                ->label('Department'),
 
-            Select::make("acadimicyear")
-                ->label("AcadimicYear")
+            Select::make('acadimicyear')
+                ->label('AcadimicYear')
                 ->reactive()
                 ->options(
                     function (callable $get) {
-
-                        $department = Department::find($get("department"));
+                        $department = Department::find($get('department'));
 
                         if ($department) {
-                            return $department->acadimicyear->pluck("name", "id") ?? [];
+                            return $department->acadimicyear->pluck('name', 'id') ?? [];
                         } else {
                             return [];
                         }
                     }
                 ),
-            Select::make("semester")
-                ->label("Semester")
+            Select::make('semester')
+                ->label('Semester')
                 ->reactive()
                 ->options(
                     function (callable $get) {
-
-                        $acadimicyear = AcadimicYear::find($get("acadimicyear"));
+                        $acadimicyear = AcadimicYear::find($get('acadimicyear'));
 
                         if ($acadimicyear && $acadimicyear->semester) {
-                            return $acadimicyear->semester->pluck("name", "id") ?? [];
+                            return $acadimicyear->semester->pluck('name', 'id') ?? [];
                         } else {
                             return [];
                         }
                     }
                 ),
 
-            Select::make("student")
-                ->label("student")
+            Select::make('student')
+                ->label('student')
                 ->reactive()
                 ->options(
                     function (callable $get) {
-
-                        $department = Department::find($get("department"));
+                        $department = Department::find($get('department'));
 
                         if ($department) {
-                            return $department->students->pluck("name", "id") ?? [];
+                            return $department->students->pluck('name', 'id') ?? [];
                         } else {
                             return [];
                         }
@@ -91,8 +87,8 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
 
     protected function getTableQuery()
     {
-        return Result::where("semester_id", $this->semester)
-            ->where("student_id", $this->student);
+        return Result::where('semester_id', $this->semester)
+            ->where('student_id', $this->student);
     }
 
     protected function getTableColumns(): array
@@ -109,6 +105,6 @@ class SearchTable extends Component  implements Tables\Contracts\HasTable, HasFo
 
     protected function getTableRecordUrlUsing()
     {
-        return fn (Result $record): string => route("showResult", ['Result' => $record]);
+        return fn (Result $record): string => route('showResult', ['Result' => $record]);
     }
 }

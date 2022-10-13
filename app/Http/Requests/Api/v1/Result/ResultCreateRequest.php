@@ -24,15 +24,15 @@ class ResultCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "student_id" => "required|exists:students,id",
-            "semester_id" => "required|exists:semesters,id",
-            "average" => "numeric|nullable",
-            "details" => "array|present",
-            "details.*.subject_id" => "required|exists:subjects,id",
-            "details.*.student_certified_hours" => "required|numeric",
-            "details.*.avarege" => "required|numeric",
-            "details.*.mark" => "required|alpha",
-            "details.*.point" => "required"
+            'student_id' => 'required|exists:students,id',
+            'semester_id' => 'required|exists:semesters,id',
+            'average' => 'numeric|nullable',
+            'details' => 'array|present',
+            'details.*.subject_id' => 'required|exists:subjects,id',
+            'details.*.student_certified_hours' => 'required|numeric',
+            'details.*.avarege' => 'required|numeric',
+            'details.*.mark' => 'required|alpha',
+            'details.*.point' => 'required',
 
         ];
     }

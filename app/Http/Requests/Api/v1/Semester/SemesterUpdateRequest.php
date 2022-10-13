@@ -24,9 +24,9 @@ class SemesterUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"alpha",
-            "acadimic_year_id"=>"exists:acadimic_years,id|numeric",
-            "is_available_for_students"=>"boolean",
+            'name' => 'alpha',
+            'acadimic_year_id' => 'exists:acadimic_years,id|numeric',
+            'is_available_for_students' => 'boolean',
         ];
     }
 }

@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SemesterResource\Pages;
-use App\Filament\Resources\SemesterResource\RelationManagers;
 use App\Models\Semester;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SemesterResource extends Resource
 {
@@ -25,9 +22,9 @@ class SemesterResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("name"),
-                Forms\Components\Select::make("acadimic_year_id")->relationship("acadimicyear","name"),
-                Forms\Components\Toggle::make("is_available_for_students"),
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\Select::make('acadimic_year_id')->relationship('acadimicyear', 'name'),
+                Forms\Components\Toggle::make('is_available_for_students'),
 
             ]);
     }

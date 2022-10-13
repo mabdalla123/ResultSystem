@@ -10,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-
 class AcadimicYearResource extends Resource
 {
     protected static ?string $model = AcadimicYear::class;
@@ -23,8 +22,8 @@ class AcadimicYearResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make("name"),
-                Forms\Components\Select::make("department_id")->relationship("department","name"),
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\Select::make('department_id')->relationship('department', 'name'),
 
             ]);
     }
@@ -35,7 +34,7 @@ class AcadimicYearResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('department.name')
+                Tables\Columns\TextColumn::make('department.name'),
             ])
             ->filters([
                 //

@@ -24,8 +24,8 @@ class StudentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"alpha",
-            "department_id"=>"exists:departments,id|numeric"
+            'name' => 'alpha',
+            'department_id' => 'exists:departments,id|numeric',
         ];
     }
 }

@@ -10,20 +10,20 @@ class Semester extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "acadimic_year_id",
-        "is_available_for_students"
+        'name',
+        'acadimic_year_id',
+        'is_available_for_students',
     ];
 
     protected $cast = [
-        "subjects"=>"array",
-        "is_available_for_students"=>"boolean",
+        'subjects' => 'array',
+        'is_available_for_students' => 'boolean',
 
     ];
 
     public function acadimicyear()
     {
-        return $this->belongsTo(AcadimicYear::class,'acadimic_year_id');
+        return $this->belongsTo(AcadimicYear::class, 'acadimic_year_id');
     }
 
     public function subjects()

@@ -18,8 +18,8 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            "name"=>$this->faker->regexify("^[a-zA-Z]{0,12}$"),
-            // "acadimicyear_id"=>AcadimicYear::factory()
+            'name' => $this->faker->regexify('^[a-zA-Z]{0,12}$'),
+            'acadimicyear_id' => AcadimicYear::factory(),
         ];
     }
 }

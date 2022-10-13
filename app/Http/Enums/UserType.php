@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Enums;
 
 use ArchTech\Enums\InvokableCases;
 
-enum UserType :int
+enum UserType: int
 {
     use InvokableCases;
 
-    case ADMIN=0;
-    case Student=1;
+    case ADMIN = 0;
+    case Student = 1;
 }

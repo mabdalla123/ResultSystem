@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Api\v1\Result;
 
 use App\Http\Controllers\Controller;
 use App\Models\Result;
-use Illuminate\Http\Request;
 
 class Index extends Controller
 {
     public function __invoke()
     {
         $results = Result::all();
+
         return response(
             [
-                "results" => $results
+                'results' => $results,
             ],
             200
         );

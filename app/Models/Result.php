@@ -11,20 +11,15 @@ class Result extends Model
 
     protected $fillable = [
 
-        "student_id",
-        "semester_id",
-        "average",
+        'student_id',
+        'semester_id',
+        'average',
 
     ];
 
     protected $cast = [
-        "average"=>"double"
+        'average' => 'double',
     ];
-
-
-
-
-
 
     ///relationships
 

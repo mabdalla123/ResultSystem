@@ -5,9 +5,6 @@ namespace App\Filament\Resources\ResultResource\Pages;
 use App\Actions\Result\ResultActions;
 use App\Filament\Resources\ResultResource;
 use App\Models\Result;
-use Exception;
-use Filament\Notifications\Notification;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateResult extends CreateRecord
@@ -18,13 +15,9 @@ class CreateResult extends CreateRecord
     {
         //check if Result is Created with all it's Details
 
-        if(ResultActions::checkCreatedSuccssfuly($this->record)){
-
+        if (ResultActions::checkCreatedSuccssfuly($this->record)) {
             //calculate total Average
-            ResultActions::SetTotalAverage( $this->record);
+            ResultActions::SetTotalAverage($this->record);
         }
     }
-
-
-
 }

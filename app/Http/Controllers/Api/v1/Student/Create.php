@@ -11,9 +11,10 @@ class Create extends Controller
     public function __invoke(StudentCreateRequest $request)
     {
         $student = Student::create($request->validated());
+
         return response(
             [
-                "student" => $student
+                'student' => $student,
             ],
             200
         );

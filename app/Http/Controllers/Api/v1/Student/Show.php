@@ -11,7 +11,7 @@ class Show extends Controller
     {
         return response(
             [
-                "student" => $student
+                'student' => $student,
             ],
             200
         );

@@ -18,10 +18,10 @@ return new class extends Migration
         Schema::create('result_details', function (Blueprint $table) {
             $table->id();
 
-            $table->double("avarege");
-            $table->string("mark");
-            $table->double("point");
-            $table->double("student_certified_hours");
+            $table->double('avarege');
+            $table->string('mark');
+            $table->double('point');
+            $table->double('student_certified_hours');
 
             //Relationship
             $table->foreignIdFor(Result::class)

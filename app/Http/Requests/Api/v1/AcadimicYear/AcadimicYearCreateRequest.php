@@ -24,8 +24,8 @@ class AcadimicYearCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|unique:acadimic_years,name",
-            "department_id"=>"required|exists:departments,id"
+            'name' => 'required|unique:acadimic_years,name',
+            'department_id' => 'required|exists:departments,id',
         ];
     }
 }

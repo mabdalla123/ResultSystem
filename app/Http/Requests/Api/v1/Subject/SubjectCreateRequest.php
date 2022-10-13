@@ -24,9 +24,9 @@ class SubjectCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|unique:subjects,name",
-            "certified_hours"=>"required|numeric",
-            "semester_id"=>"required|exists:semesters,id",
+            'name' => 'required|unique:subjects,name',
+            'certified_hours' => 'required|numeric',
+            'semester_id' => 'required|exists:semesters,id',
         ];
     }
 }

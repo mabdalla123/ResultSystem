@@ -24,7 +24,7 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"alpha|unique:departments,name"
+            'name' => 'alpha|unique:departments,name',
 
         ];
     }

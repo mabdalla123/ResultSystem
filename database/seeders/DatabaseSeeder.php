@@ -11,7 +11,6 @@ use App\Models\Semester;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,35 +23,35 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-/*
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
-            'UserType' => UserType::ADMIN,
-        ]);
+        /*
+                \App\Models\User::factory()->create([
+                    'name' => 'Admin',
+                    'email' => 'admin@admin.com',
+                    'password' => bcrypt('admin123'),
+                    'UserType' => UserType::ADMIN,
+                ]);
 
 
-        $dept = Department::factory([
-            "name"=>"IT"
-        ])->create();
+                $dept = Department::factory([
+                    "name"=>"IT"
+                ])->create();
 
-        Student::factory([
-            "department_id" => $dept->id
-        ])->count(10)->create();
+                Student::factory([
+                    "department_id" => $dept->id
+                ])->count(10)->create();
 
-        $acadimicyear = AcadimicYear::factory([
-            "department_id" => $dept->id
-        ])->create();
+                $acadimicyear = AcadimicYear::factory([
+                    "department_id" => $dept->id
+                ])->create();
 
-        $Semester = Semester::factory([
-            "acadimic_year_id" => $acadimicyear->id
-        ])->create();
+                $Semester = Semester::factory([
+                    "acadimic_year_id" => $acadimicyear->id
+                ])->create();
 
-        Subject::factory([
-            "semester_id" => $Semester->id,
-            "certified_hours" => 3
-        ])->count(4)->create();
-        */
+                Subject::factory([
+                    "semester_id" => $Semester->id,
+                    "certified_hours" => 3
+                ])->count(4)->create();
+                */
     }
 }

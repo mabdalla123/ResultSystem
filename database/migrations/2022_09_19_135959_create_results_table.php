@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Student::class);
             $table->foreignIdFor(Semester::class);
-            $table->double("average")->nullable();
+            $table->double('average')->nullable();
             $table->timestamps();
         });
     }

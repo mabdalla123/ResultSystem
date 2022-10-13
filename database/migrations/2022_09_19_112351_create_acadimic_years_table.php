@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('acadimic_years', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string('name');
             $table->foreignIdFor(Department::class);
             $table->timestamps();
         });

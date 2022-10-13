@@ -24,9 +24,9 @@ class ResultUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "student_id" => "exists:students,id",
-            "semester_id" => "exists:semesters,id",
-            "average" => "nullable"
+            'student_id' => 'exists:students,id',
+            'semester_id' => 'exists:semesters,id',
+            'average' => 'nullable',
 
         ];
     }

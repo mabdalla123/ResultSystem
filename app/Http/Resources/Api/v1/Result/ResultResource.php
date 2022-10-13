@@ -15,10 +15,10 @@ class ResultResource extends ResourceCollection
     public function toArray($request)
     {
         return [
-            "student_id" => $request->student_id,
-            "semester_id" => $request->semester_id,
-            "average" => $request->average,
-            "details"=> $request->details
+            'student_id' => $request->student_id,
+            'semester_id' => $request->semester_id,
+            'average' => $request->average,
+            'details' => $request->details,
             // "details" => ResultDetailsResource::collection($request->details)
         ];
     }

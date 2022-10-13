@@ -24,12 +24,12 @@ class ResultDetailUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "result_id"=>"exists:results,id",
-            "subject_id"=>"exists:subjects,id",
-            "student_certified_hours"=>"numeric",
-            "avarege"=>"numeric",
-            "mark"=>"alpha",
-            "point"=>"numeric",
+            'result_id' => 'exists:results,id',
+            'subject_id' => 'exists:subjects,id',
+            'student_certified_hours' => 'numeric',
+            'avarege' => 'numeric',
+            'mark' => 'alpha',
+            'point' => 'numeric',
         ];
     }
 }

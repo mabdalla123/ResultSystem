@@ -23,10 +23,9 @@ class SubjectResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make("name"),
-                Forms\Components\TextInput::make("certified_hours"),
-                Forms\Components\Select::make("semester_id")->relationship('semester','name'),
-
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('certified_hours'),
+                Forms\Components\Select::make('semester_id')->relationship('semester', 'name'),
 
             ]);
     }

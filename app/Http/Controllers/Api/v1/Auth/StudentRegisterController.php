@@ -12,9 +12,10 @@ class StudentRegisterController extends Controller
     {
         //Register All Students
         $student = Student::create($request->validated());
+
         return response(
             [
-                "Student" => $student
+                'Student' => $student,
             ],
             status: 200
         );

@@ -4,10 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('v1')->group(function () {
-
-
     Route::post('/login', LoginController::class);
     /*
     get the User
@@ -21,7 +18,6 @@ Route::prefix('v1')->group(function () {
     /**
      * Department Controllers
      */
-
     Route::get('department', App\Http\Controllers\Api\v1\Department\index::class);
 
     Route::post('department/create', App\Http\Controllers\Api\v1\Department\create::class);
@@ -133,7 +129,6 @@ Route::prefix('v1')->group(function () {
     Route::put('result/{result}/detail/{resultDetail}/edit', App\Http\Controllers\Api\v1\Result\Detail\Edit::class);
 
     Route::delete('result/{result}/detail/{resultDetail}/delete', App\Http\Controllers\Api\v1\Result\Detail\Delete::class);
-
 
     /**
      * End Result Details Controller

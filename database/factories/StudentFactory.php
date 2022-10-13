@@ -18,8 +18,8 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            "name"=>$this->faker->name,
-            "department_id"=>Department::factory()
+            'name' => $this->faker->name,
+            'department_id' => Department::factory(),
         ];
     }
 }

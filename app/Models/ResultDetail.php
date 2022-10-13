@@ -10,18 +10,18 @@ class ResultDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        "result_id",
-        "subject_id",
-        "student_certified_hours",
-        "avarege",
-        "mark",
-        "point",
+        'result_id',
+        'subject_id',
+        'student_certified_hours',
+        'avarege',
+        'mark',
+        'point',
 
     ];
 
     protected $cast = [
-        "avarege"=>"double",
-        "point"=>"double",
+        'avarege' => 'double',
+        'point' => 'double',
 
     ];
 

@@ -11,21 +11,18 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "certified_hours",
-        "semester_id",
+        'name',
+        'certified_hours',
+        'semester_id',
 
     ];
 
-    protected $cast=[
-        "certified_hours"=>"double"
+    protected $cast = [
+        'certified_hours' => 'double',
     ];
 
-
-    public function semester():BelongsTo
+    public function semester(): BelongsTo
     {
         return $this->belongsTo(Semester::class);
     }
-
-
 }

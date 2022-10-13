@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->boolean("is_available_for_students")->default(false);
+            $table->string('name');
+            $table->boolean('is_available_for_students')->default(false);
             $table->foreignIdFor(AcadimicYear::class);
             $table->timestamps();
         });

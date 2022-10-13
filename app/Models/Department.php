@@ -10,10 +10,8 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
+        'name',
     ];
-
-
 
     public function acadimicyear()
     {
@@ -24,6 +22,4 @@ class Department extends Model
     {
         return $this->hasMany(Student::class);
     }
-
-
 }

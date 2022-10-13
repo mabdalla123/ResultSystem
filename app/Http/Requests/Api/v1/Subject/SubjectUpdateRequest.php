@@ -24,9 +24,9 @@ class SubjectUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"unique:subjects,name",
-            "certified_hours"=>"numeric",
-            "semester_id"=>"exists:semesters,id",
+            'name' => 'unique:subjects,name',
+            'certified_hours' => 'numeric',
+            'semester_id' => 'exists:semesters,id',
         ];
     }
 }

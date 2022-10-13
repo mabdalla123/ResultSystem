@@ -24,9 +24,9 @@ class SemesterCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|alpha|unique:semesters,name",
-            "acadimic_year_id"=>"required|exists:acadimic_years,id|numeric",
-            "is_available_for_students"=>"required|boolean",
+            'name' => 'required|alpha|unique:semesters,name',
+            'acadimic_year_id' => 'required|exists:acadimic_years,id|numeric',
+            'is_available_for_students' => 'required|boolean',
         ];
     }
 }

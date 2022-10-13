@@ -4,12 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Actions\Result\ResultActions;
 use App\Filament\Resources\ResultResource\Pages;
-use App\Filament\Resources\ResultResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Result;
 use App\Models\Semester;
 use App\Models\Subject;
-use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
@@ -30,86 +28,81 @@ class ResultResource extends Resource
         return $form
             ->schema([
 
-
-                Forms\Components\Select::make("department_id")
-                    ->label("Department")
+                Forms\Components\Select::make('department_id')
+                    ->label('Department')
                     ->options(function () {
-                        return Department::all()->pluck("name", "id");
+                        return Department::all()->pluck('name', 'id');
                     })
                     ->reactive()
                     ->columnSpan([
-                        "md" => 1
+                        'md' => 1,
                     ])
                     ->afterStateUpdated(
-                        fn (callable $set) => $set("semester_id", null)
+                        fn (callable $set) => $set('semester_id', null)
                     )
                     ->required(),
-                Forms\Components\Select::make("semester_id")
-                    ->relationship("semester", "name")
+                Forms\Components\Select::make('semester_id')
+                    ->relationship('semester', 'name')
                     ->reactive()
                     ->columnSpan([
-                        "md" => 1
+                        'md' => 1,
                     ])
                     ->afterStateUpdated(
-                        fn (callable $set) => $set("subject_id", null)
+                        fn (callable $set) => $set('subject_id', null)
                     )
                     ->required(),
-                Forms\Components\Select::make("student_id")
-                    ->relationship("student", "name")
+                Forms\Components\Select::make('student_id')
+                    ->relationship('student', 'name')
                     ->searchable()
                     ->reactive()
                     ->columnSpan([
-                        "md" => 1
+                        'md' => 1,
                     ])
                     ->required()
                     ->afterStateUpdated(function (callable $get, $set) {
-
-                        $result = Result::where("semester_id", $get("semester_id"))
-                            ->where("student_id", $get("student_id"))->count();
+                        $result = Result::where('semester_id', $get('semester_id'))
+                            ->where('student_id', $get('student_id'))->count();
 
                         if ($result != 0) {
-
                             Notification::make()
-                                ->title("Student already has a result in this semester")
+                                ->title('Student already has a result in this semester')
                                 ->danger()
                                 ->send();
 
                             return back();
                         }
                     }),
-                Forms\Components\TextInput::make("average")
+                Forms\Components\TextInput::make('average')
                     ->columnSpan([
-                        "md" => 1
+                        'md' => 1,
                     ])
-                    ->label("Semester Average")
+                    ->label('Semester Average')
                     ->disabled(),
 
                 Forms\Components\Card::make()->schema([
                     Forms\Components\Placeholder::make('Result details'),
                     Forms\Components\Repeater::make('details')
-                        ->label("subjects")
+                        ->label('subjects')
                         ->relationship()
                         ->schema([
                             Forms\Components\Select::make('subject_id')
-                                ->label("subjects")
+                                ->label('subjects')
                                 ->reactive()
                                 ->required()
                                 ->options(
                                     function (callable $get) {
-
-                                        $semester = Semester::find($get("../../semester_id"));
+                                        $semester = Semester::find($get('../../semester_id'));
                                         if ($semester) {
                                             return $semester->subjects
-                                                ->pluck("name", "id");
+                                                ->pluck('name', 'id');
                                         } else {
-
                                             return [];
                                         }
                                     }
                                 )
-                                ->afterStateUpdated(function($state,callable $set){
+                                ->afterStateUpdated(function ($state, callable $set) {
                                     $subject = Subject::find($state);
-                                    $set("subject_certified_hours",$subject->certified_hours);
+                                    $set('subject_certified_hours', $subject->certified_hours);
                                 }),
 
                             Forms\Components\TextInput::make('avarege')
@@ -117,28 +110,27 @@ class ResultResource extends Resource
                                 ->minValue(0)
                                 ->maxValue(100)
                                 ->afterStateUpdated(function ($state, callable $set) {
-
                                     if ($state >= 80 && $state <= 100) {
-                                        $set("mark", "A");
-                                        $set("point", 6);
-                                    } else if ($state >= 70 && $state <= 79) {
-                                        $set("mark", "B+");
-                                        $set("point", 5);
-                                    } else if ($state >= 60 && $state <= 69) {
-                                        $set("mark", "B");
-                                        $set("point", 4);
-                                    } else if ($state >= 55 && $state <= 59) {
-                                        $set("mark", "C+");
-                                        $set("point", 3.5);
-                                    } else if ($state >= 50 && $state <= 54) {
-                                        $set("mark", "C");
-                                        $set("point", 3);
-                                    } else if ($state >= 40 && $state <= 49) {
-                                        $set("mark", "D");
-                                        $set("point", 2.4);
-                                    } else if ($state < 40) {
-                                        $set("mark", "F");
-                                        $set("point", 0);
+                                        $set('mark', 'A');
+                                        $set('point', 6);
+                                    } elseif ($state >= 70 && $state <= 79) {
+                                        $set('mark', 'B+');
+                                        $set('point', 5);
+                                    } elseif ($state >= 60 && $state <= 69) {
+                                        $set('mark', 'B');
+                                        $set('point', 4);
+                                    } elseif ($state >= 55 && $state <= 59) {
+                                        $set('mark', 'C+');
+                                        $set('point', 3.5);
+                                    } elseif ($state >= 50 && $state <= 54) {
+                                        $set('mark', 'C');
+                                        $set('point', 3);
+                                    } elseif ($state >= 40 && $state <= 49) {
+                                        $set('mark', 'D');
+                                        $set('point', 2.4);
+                                    } elseif ($state < 40) {
+                                        $set('mark', 'F');
+                                        $set('point', 0);
                                     }
                                 }),
                             Forms\Components\TextInput::make('student_certified_hours')
@@ -151,22 +143,19 @@ class ResultResource extends Resource
                             Forms\Components\TextInput::make('point')
                                 ->hidden()
                                 ->reactive(),
-                                Forms\Components\TextInput::make('subject_certified_hours')
-                                ->hidden()
-                                ->reactive(),
-
-
+                            Forms\Components\TextInput::make('subject_certified_hours')
+                            ->hidden()
+                            ->reactive(),
 
                         ])->minItems(function (callable $get) {
-                            $semester = Semester::find($get("semester_id"));
+                            $semester = Semester::find($get('semester_id'));
                             if ($semester) {
                                 return $semester->subjects
                                     ->count();
                             } else {
-
                                 return 0;
                             }
-                        })
+                        }),
                 ]),
 
             ]);
@@ -210,7 +199,7 @@ class ResultResource extends Resource
         ];
     }
 
-    protected function mutateFormDataBeforeCreate (array $array):array
+    protected function mutateFormDataBeforeCreate(array $array): array
     {
         return ResultActions::SetTotalAverage($array);
     }

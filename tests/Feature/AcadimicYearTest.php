@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AcadimicYear;
+use App\Models\Department;
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -9,38 +10,36 @@ use function Pest\Laravel\put;
 /**
  * Crud Operation
  */
+
 it('can Create a acadimicyear', function () {
-    $acadimicyear = AcadimicYear::factory()->raw();
+    $acadimicyear =Acadimicyear::factory([
+        "department_id"=>Department::first()->id
+    ])->raw();
     $response = postJson(
         '/api/v1/acadimicyear/create',
         $acadimicyear
     )
         ->assertStatus(200)
         ->json('acadimicyear');
+
+        $this->acadimicyear = $acadimicyear;
 });
 
 it('can show a acadimicyear', function () {
-    $response = get('/api/v1/acadimicyear/'.AcadimicYear::first()->id)
+    $response = get('/api/v1/acadimicyear/'.Acadimicyear::first()->id)
         ->assertStatus(200)
         ->json('acadimicyear');
 });
 
 it('can edit a acadimicyear', function () {
-    $acadimicyear = Acadimicyear::first();
+    
     $data = AcadimicYear::factory()->raw();
-    $response = put('/api/v1/acadimicyear/'.$acadimicyear->id.'/edit', $data)
+    $response = put('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/edit', $data)
         ->assertStatus(200);
     //->assertSee($data)
 });
 
-it('can delete Acadimicyear', function () {
-    $acadimicyear = AcadimicYear::factory()->create();
-    $response = deleteJson('/api/v1/acadimicyear/'.$acadimicyear->id.'/delete')
-        ->assertStatus(200)
-        ->assertSee([
-            'Message' => 'Item Deleted',
-        ]);
-});
+
 
 /**
  * End Crud Operation
@@ -89,7 +88,7 @@ it('cant edit if department_id is not a number', function () {
     $data = AcadimicYear::factory([
         'department_id' => '123test',
     ])->raw();
-    $response = put('/api/v1/acadimicyear/'.$acadimicyear->id.'/edit', $data)
+    $response = put('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/edit', $data)
         ->assertStatus(302);
 });
 
@@ -98,18 +97,29 @@ it('cant edit if department_id does not exist', function () {
     $data = AcadimicYear::factory([
         'department_id' => '123456789987654321',
     ])->raw();
-    $response = put('/api/v1/acadimicyear/'.$acadimicyear->id.'/edit', $data)
+    $response = put('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/edit', $data)
         ->assertStatus(302);
 });
 
 it('cant edit if acadimicyear name is not unique', function () {
     $acadimicyear = AcadimicYear::first();
 
-    $response = put('/api/v1/acadimicyear/'.$acadimicyear->id.'/edit', [
+    $response = put('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/edit', [
         'name' => $acadimicyear->name,
     ])
         ->assertStatus(302);
 });
+
+
+it('can delete Acadimicyear', function () {
+   
+    $response = deleteJson('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/delete')
+        ->assertStatus(200)
+        ->assertSee([
+            'Message' => 'Item Deleted',
+        ]);
+});
+
 
 /**
  * End Test Update Rules

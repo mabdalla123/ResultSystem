@@ -19,7 +19,7 @@ class AcadimicYearFactory extends Factory
     {
         return [
             'name' => $this->faker->regexify('^[a-zA-Z]{0,12}$'),
-            'department_id' => Department::factory(),
+           // 'department_id' => Department::factory(),
         ];
     }
 }

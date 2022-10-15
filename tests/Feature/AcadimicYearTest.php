@@ -11,10 +11,9 @@ use function Pest\Laravel\put;
  * Crud Operation
  */
 
-it('can Create a acadimicyear', function () {
-    $acadimicyear =Acadimicyear::factory([
-        "department_id"=>Department::first()->id
-    ])->raw();
+it('can Create an acadimicyear', function () {
+    $acadimicyear =Acadimicyear::factory()->raw();
+    $acadimicyear["department_id"]= Department::first()->id ?? Department::factory()->create()->id;
     $response = postJson(
         '/api/v1/acadimicyear/create',
         $acadimicyear

@@ -1,10 +1,14 @@
     <?php
 
 use App\Models\Department;
+use App\Models\AcadimicYear;
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\put;
+
+use Illuminate\Support\Str;
+
 
 /**
  * Crud Operation
@@ -16,7 +20,10 @@ it('can load department End point correctly', function () {
 });
 
 it('can Create a department', function () {
-    $dept = Department::factory()->raw();
+    $dept = Department::factory([
+        "acadimicyear_id"=>AcadimicYear::first()->id,
+        "name"=>chr(rand(97,122)),
+    ])->raw();
     $response = postJson(
         '/api/v1/department/create',
         $dept
@@ -33,20 +40,15 @@ it('can show a Department', function () {
 
 it('can edit a Department', function () {
     $dept = Department::first();
-    $data = Department::factory()->raw();
+    $data = Department::factory([
+        "name"=>"test",
+        "acadimicyear_id"=>AcadimicYear::first()->id
+    ])->raw();
     $response = put('/api/v1/department/'.$dept->id.'/edit', $data)
         ->assertStatus(200)
         ->assertSee($data);
 });
 
-it('can delete Departments', function () {
-    $dept = Department::factory()->create();
-    $response = deleteJson('/api/v1/department/'.$dept->id.'/delete')
-        ->assertStatus(200)
-        ->assertSee([
-            'Message' => 'Item Deleted',
-        ]);
-});
 
 /**
  * End Crud Operation
@@ -68,6 +70,7 @@ it('cant create a department if name is not provided ', function () {
 it('should not create a department if name contains a Number', function () {
     $dept = Department::factory([
         'name' => 'Test123',
+        "acadimicyear_id"=>AcadimicYear::first()->id
     ])->raw();
     $response = postJson(
         '/api/v1/department/create',
@@ -103,3 +106,13 @@ it('cant edit if Department name is not unique', function () {
 /**
  * End Test Update Rules
  */
+
+
+it('can delete a Department', function () {
+    $dept = Department::first();
+    $response = deleteJson('/api/v1/department/'.$dept->id.'/delete')
+        ->assertStatus(200)
+        ->assertSee([
+            'Message' => 'Item Deleted',
+        ]);
+});

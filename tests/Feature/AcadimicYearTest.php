@@ -10,10 +10,9 @@ use function Pest\Laravel\put;
 /**
  * Crud Operation
  */
-
 it('can Create an acadimicyear', function () {
-    $acadimicyear =Acadimicyear::factory()->raw();
-    $acadimicyear["department_id"]= Department::first()->id ?? Department::factory()->create()->id;
+    $acadimicyear = Acadimicyear::factory()->raw();
+    $acadimicyear['department_id'] = Department::first()->id ?? Department::factory()->create()->id;
     $response = postJson(
         '/api/v1/acadimicyear/create',
         $acadimicyear
@@ -21,7 +20,7 @@ it('can Create an acadimicyear', function () {
         ->assertStatus(200)
         ->json('acadimicyear');
 
-        $this->acadimicyear = $acadimicyear;
+    $this->acadimicyear = $acadimicyear;
 });
 
 it('can show a acadimicyear', function () {
@@ -31,14 +30,11 @@ it('can show a acadimicyear', function () {
 });
 
 it('can edit a acadimicyear', function () {
-    
     $data = AcadimicYear::factory()->raw();
     $response = put('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/edit', $data)
         ->assertStatus(200);
     //->assertSee($data)
 });
-
-
 
 /**
  * End Crud Operation
@@ -109,16 +105,13 @@ it('cant edit if acadimicyear name is not unique', function () {
         ->assertStatus(302);
 });
 
-
 it('can delete Acadimicyear', function () {
-   
     $response = deleteJson('/api/v1/acadimicyear/'.Acadimicyear::first()->id.'/delete')
         ->assertStatus(200)
         ->assertSee([
             'Message' => 'Item Deleted',
         ]);
 });
-
 
 /**
  * End Test Update Rules

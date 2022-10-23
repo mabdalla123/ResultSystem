@@ -12,7 +12,12 @@ use function Pest\Laravel\put;
  */
 it('can Create an acadimicyear', function () {
     $acadimicyear = Acadimicyear::factory()->raw();
-    $acadimicyear['department_id'] = Department::first()->id ?? Department::factory()->create()->id;
+    $acadimicyear['department_id'] =
+                                    Department::first()->id ??
+                                    Department::factory([
+                                        'acadimicyear_id' => AcadimicYear::first()->id,
+                                        'name' => chr(rand(97, 122)),
+                                    ])->create();
     $response = postJson(
         '/api/v1/acadimicyear/create',
         $acadimicyear
